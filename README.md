@@ -1,0 +1,2 @@
+# TruSeeker
+Blockchain News Validation
