@@ -131,7 +131,7 @@ class PeerToPeer {
 
   handleReceivedBlockchain(message) {
     const receivedChain = message.data;
-    
+
     try {
       this.blockchain.replaceChain(receivedChain);
     } catch(err) {

@@ -21,7 +21,7 @@ module.exports = cli;
 
 // COMMANDS
 function welcome(vorpal) {
-  vorpal.log("Welcome to Blockchain CLI!");
+  vorpal.log("Welcome to TruSeeker's CLI!");
   vorpal.exec("help");
 }
 
@@ -84,7 +84,7 @@ function mineCommand(vorpal) {
     .action(function(args, callback) {
       if (args.data) {
         blockchain.mine(args.data);
-        p2p.broadcastLatest(); 
+        p2p.broadcastLatest();
       }
       callback();
     })
