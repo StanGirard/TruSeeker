@@ -4,8 +4,10 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",
+    "embark": "^3.2.3",
     "firebase": "^5.5.0",
     "font-awesome": "^4.7.0",
+    "jquery": "^3.3.1",
     "lodash": "^4.17.10",
     "nodemon": "^1.18.3",
     "prop-types": "^15.6.2",
@@ -23,7 +25,9 @@
     "redux-burger-menu": "^0.2.7",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "semantic-ui-react": "^0.82.3"
+    "semantic-ui-react": "^0.82.3",
+    "vort_x": "^1.1.2",
+    "vort_x-components": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
