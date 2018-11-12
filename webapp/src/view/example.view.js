@@ -5,33 +5,27 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Button } from 'semantic-ui-react'
 import { exampleConstants } from '../actions/example.actions'
-import Notification from './example.notificationCreation'
+import Notification from '../components/example.notificationCreation'
 import NotificationsSystem from 'reapop'
 // 2. import reapop theme
 import theme from 'reapop-theme-wybo'
-
+//import ExampleComponent from '../components/example.component'
+import FlexView from 'react-flexview/lib';
+import Menu from '../components/menu.components'
+import Header from '../components/header.component'
 
 const Example = (props) => {
   const { text, exampleConstants } = (props)
-  const handleButtonClick = () => {
-    if (text === undefined) {
-      exampleConstants('Hello World!')
-    } else {
-      exampleConstants(undefined);
-    }
-  }
+  
 
   return (
     <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <h1 className='App-title'>TruSeeker</h1>
-      </header>
+      <Header/>
+      <FlexView height={60} hAlignContent='center' marginTop={10} marginBottom={10}>
+        <Menu/>
+      </FlexView>
 
-      <Button onClick={handleButtonClick}> Try Me !!! </Button>
-      <p> {text} </p>
-      <Notification />
-      <NotificationsSystem theme={theme} />
+      {/* Add your components here */ }
     </div>
   )
 }
