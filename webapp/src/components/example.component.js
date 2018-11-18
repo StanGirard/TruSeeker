@@ -38,6 +38,6 @@ import FlexView from 'react-flexview'
   
   export default withRouter(connect(
     (state) => ({text : state.example.example.text}), // Here are the variables to which you want to subscribe in the store
-    {history} // Here are the functions that dispatch an action
+    {} // Here are the functions that dispatch an action
   )(Example))
 
