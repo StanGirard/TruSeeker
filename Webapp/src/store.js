@@ -8,14 +8,14 @@ import { reducer as notificationsReducer } from 'reapop'
 const persistedState = loadState()
 const notifications = notificationsReducer()
 
-/*const reducer = combineReducers({
+const reducer = combineReducers({
   example: exampleReducer,
   notifications: notifications
-})*/
+})
 
 const configureStore = () => {
   return createStore(
-    exampleReducer,
+    reducer,
     persistedState,
     applyMiddleware(createLogger(), thunk)
   )

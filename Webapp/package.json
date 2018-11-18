@@ -2,8 +2,10 @@
   "name": "TruSeeker",
   "version": "0.1.0",
   "private": true,
+  "main": "public/electron.js",
   "dependencies": {
     "classnames": "^2.2.6",
+    "electron-is-dev": "^1.0.1",
     "embark": "^3.2.3",
     "firebase": "^5.5.0",
     "font-awesome": "^4.7.0",
@@ -35,11 +37,17 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "esw src  --color",
-    "lint:watch": "npm run lint -- --watch"
+    "lint:watch": "npm run lint -- --watch",
+    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "devDependencies": {
     "babel-polyfill": "^6.26.0",
+    "concurrently": "^4.0.1",
     "css-loader": "^1.0.0",
+    "electron": "^3.0.9",
+    "electron-builder": "^20.34.0",
+    "electron-devtools-installer": "^2.2.4",
+    "electron-rebuild": "^1.8.2",
     "eslint": "^5.5.0",
     "eslint-config-google": "^0.10.0",
     "eslint-config-standard": "^12.0.0",
@@ -52,6 +60,7 @@
     "eslint-watch": "^4.0.2",
     "file-loader": "^2.0.0",
     "style-loader": "^0.23.0",
-    "url-loader": "^1.1.1"
+    "url-loader": "^1.1.1",
+    "wait-on": "^3.2.0"
   }
 }
