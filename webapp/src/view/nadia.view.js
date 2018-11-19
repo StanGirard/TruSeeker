@@ -10,6 +10,7 @@ import NotificationsSystem from 'reapop'
 // 2. import reapop theme
 import theme from 'reapop-theme-wybo'
 //import ExampleComponent from '../components/example.component'
+import LogInComponentContainerComponent from '../components/logInComponentContainer.component'
 import FlexView from 'react-flexview/lib';
 import Menu from '../components/menu.components'
 import Header from '../components/header.component'
@@ -25,7 +26,7 @@ const Example = (props) => {
         <Menu/>
       </FlexView>
 
-      {/* Add your components here */ }
+      <LogInComponentContainerComponent introText={"Welcome to TRUSeeker"}/>
     </div>
   )
 }
