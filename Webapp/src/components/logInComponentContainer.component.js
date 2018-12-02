@@ -21,7 +21,6 @@ class LogInComponentContainerComponent extends Component {
     }
 
     handlePasswordInput(event){
-
         this.setState({password: event.target.value});
 
     }
