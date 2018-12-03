@@ -5,25 +5,23 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {} from 'semantic-ui-react'
 import firebase from '../Firebase'
-
+ 
 import { Button, Form, Grid, Image, Message, Segment } from 'semantic-ui-react'
  import FlexView from 'react-flexview/lib';
-import Menu from '../components/menu.components'
-import Header from '../components/header.component'
-import FormError from '../view/FormError'
-
+import Menu from './menu.components'
+import Header from './header.component'
  
-
-  class Register extends Component {
+  class AddNews extends Component {
     constructor(props) {
       super(props)
       
 
        this.state = {
-        fullName: '',
-        emailAddress:'',
-        passwordOne:'',
-        passwordTwo:'',
+        title: '',
+        desc:'',
+        rating:0,
+        viewers:0,
+        created_at: new Date(),
         errorMessage:null
 
       };
@@ -31,25 +29,20 @@ import FormError from '../view/FormError'
       this.handleSubmit=this.handleSubmit.bind(this);
 
     }
-    componentDidMount() {
-    }
-
-    componentWillUnmount(){
-      // Does something right before the component gets unmounted.
-    }
+    
 
     handleChange(e){
       const itemName=e.target.name;
       const itemValue=e.target.value;
 
       this.setState({[itemName]:itemValue},()=>{
-        if(this.state.passwordOne!==this.state.passwordTwo){
+        if(this.state.title!==null){
           this.setState({
-            errorMessage:'Passwords Not Matched'
+            errorMessage:'News Title Cannot Be Empty !'
           })
-        }else{
+        }else if(this.state.desc!==null){
           this.setState({
-            errorMessage:null
+            errorMessage:'News Description Cannot Be Empty !'
           })
         }
       });
@@ -58,15 +51,17 @@ import FormError from '../view/FormError'
 
 
     handleSubmit(e){
-      var registrationInfo={
-        name: this.state.fullName,
-        email: this.state.emailAddress,
-        password:this.state.passwordOne
+      var newsInfo={
+        title: this.state.title,
+        desc: this.state.desc,
+        viewers:this.state.viewers,
+        rating:this.state.rating,
+        created_at:this.state.created_at
       }
       e.preventDefault();
  
-      firebase.firestore().collection('users').add({
-       registrationInfo
+      firebase.firestore().collection('news').add({
+        newsInfo
       });
     }
 
@@ -87,17 +82,15 @@ import FormError from '../view/FormError'
                     <Grid.Column style={{ maxWidth: 450 }}>
                         <h2 className='ui teal center aligned header'>
                             <img src={logo} className='ui image'/>
-                                Create TRUESeeker Account.
+                                Create News 
                         </h2>
                         <Form size='large' onSubmit={this.handleSubmit}>
                             <Segment stacked>
                             
-                            {/* view components */}
-                                <Form.Input fluid icon='user' iconPosition='left' placeholder='Full Name' name='fullName' value={this.state.fullName} onChange={this.handleChange}/>
-                                <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' name='emailAddress' value={this.state.emailAddress} onChange={this.handleChange}/>
-                                <Form.Input fluid icon='lock' iconPosition='left' placeholder='Password' name='passwordOne' value={this.state.passwordOne} onChange={this.handleChange}/>
-                                <Form.Input fluid icon='lock' iconPosition='left' placeholder='Confirm Password' name='passwordTwo' value={this.state.passwordTwo} onChange={this.handleChange}/>
-                                <div>
+                                 <Form.Input iconPosition='left' placeholder='Add News Title' name='title' value={this.state.title} onChange={this.handleChange}/>
+                                <Form.Input  iconPosition='left' placeholder='Add Actual News Description' name='desc' value={this.state.desc} onChange={this.handleChange}/>
+                                
+                                 <div>
                                   {this.state.errorMessage!==null?
                                   <Message>
                                   {this.state.errorMessage}
@@ -105,22 +98,14 @@ import FormError from '../view/FormError'
                                    :null
                                   }
                                   </div>
-                                  
-                                 {/* I want to use new component for all error messages
-                                 <div>
-                                  {this.state.errorMessage!==null?
-                                  (<FormError errorMessage={this.state.errorMessage}/>):null
-                                  }
-                                  </div> */}
+                                
                                 <Button color='teal' fluid size='large'>
-                                    Register User
+                                    Add Article
                                 </Button>
 
                             </Segment>
                         </Form>
-                        <Message>
-                            New to us? <a href='#'>Sign In</a>
-                        </Message>
+                        
                     </Grid.Column>
                     
                    
@@ -136,5 +121,5 @@ import FormError from '../view/FormError'
   export default withRouter(connect(
     (state) => ({text : state.example.example.text}), // Here are the variables to which you want to subscribe in the store
     {} // Here are the functions that dispatch an action
-  )(Register))
+  )(AddNews))
 

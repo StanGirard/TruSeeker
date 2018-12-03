@@ -16,7 +16,7 @@ import Header from '../components/header.component'
 
 const Example = (props) => {
   const { text, exampleConstants } = (props)
-  
+ 
 
   return (
     <div className='App'>

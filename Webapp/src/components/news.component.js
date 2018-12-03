@@ -8,36 +8,56 @@ import firebase from '../Firebase'
 
 import { Button, Form, Grid, Image, Message, Segment } from 'semantic-ui-react'
  import FlexView from 'react-flexview/lib';
-import Menu from '../components/menu.components'
-import Header from '../components/header.component'
+import Menu from './menu.components'
+import Header from './header.component'
 import FormError from '../view/FormError'
 
  
 
-  class Register extends Component {
+  class News extends Component {
     constructor(props) {
       super(props)
-      
+      this.ref = firebase.firestore().collection('news');
+      this.unsubscribe = null;
 
        this.state = {
-        fullName: '',
-        emailAddress:'',
-        passwordOne:'',
-        passwordTwo:'',
-        errorMessage:null
-
+        loading: true,
+        todos: [],
       };
-      this.handleChange=this.handleChange.bind(this);
-      this.handleSubmit=this.handleSubmit.bind(this);
-
+ 
     }
+
+
     componentDidMount() {
+      this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate) 
+      // firebase.firestore().collection('users').add({
+      //   registrationInfo
+      //  });
     }
+  
+  componentWillUnmount() {
+      this.unsubscribe();
+  }
 
-    componentWillUnmount(){
-      // Does something right before the component gets unmounted.
-    }
 
+  onCollectionUpdate = (querySnapshot) => {
+    const news = [];
+    querySnapshot.forEach((doc) => {
+      const { title, complete } = doc.data();
+      news.push({
+        key: doc.id,
+        doc,  
+        title,
+        complete,
+      });
+    });
+    this.setState({ 
+      todos:null,
+      loading: false,
+   });
+  }
+
+    //need for search
     handleChange(e){
       const itemName=e.target.name;
       const itemValue=e.target.value;
@@ -56,19 +76,7 @@ import FormError from '../view/FormError'
 
     }
 
-
-    handleSubmit(e){
-      var registrationInfo={
-        name: this.state.fullName,
-        email: this.state.emailAddress,
-        password:this.state.passwordOne
-      }
-      e.preventDefault();
  
-      firebase.firestore().collection('users').add({
-       registrationInfo
-      });
-    }
 
     render () {
        return (
@@ -86,8 +94,7 @@ import FormError from '../view/FormError'
                 <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
                     <Grid.Column style={{ maxWidth: 450 }}>
                         <h2 className='ui teal center aligned header'>
-                            <img src={logo} className='ui image'/>
-                                Create TRUESeeker Account.
+                                 Create TRUESeeker Account.
                         </h2>
                         <Form size='large' onSubmit={this.handleSubmit}>
                             <Segment stacked>
@@ -136,5 +143,5 @@ import FormError from '../view/FormError'
   export default withRouter(connect(
     (state) => ({text : state.example.example.text}), // Here are the variables to which you want to subscribe in the store
     {} // Here are the functions that dispatch an action
-  )(Register))
+  )(News))
 
