@@ -6,6 +6,7 @@ import Fay from './view/fay.view'
 import Nadia from './view/nadia.view'
 import Louis from './view/louis.view'
 import Youbaraj from './view/youbaraj.view'
+import CreateAccount from './view/createAccount.view'
 
 class App extends Component {
   render () {
@@ -20,6 +21,9 @@ class App extends Component {
             <Route exact path='/nadia' component={Nadia} />
             <Route exact path='/louis' component={Louis} />
             <Route exact path='/youbaraj' component={Youbaraj} />
+            <Route exact path='/createAccount' component={CreateAccount} />
+
+
 
           </Switch>
         </div>
