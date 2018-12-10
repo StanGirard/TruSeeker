@@ -10,6 +10,7 @@ import NotificationsSystem from 'reapop'
 // 2. import reapop theme
 import theme from 'reapop-theme-wybo'
 //import ExampleComponent from '../components/example.component'
+import {Segment} from 'semantic-ui-react'
 import CreateAccountScreen from '../components/createAccountScreen.component'
 import FlexView from 'react-flexview/lib';
 import Menu from '../components/menu.components'
@@ -26,7 +27,12 @@ const Example = (props) => {
         <FlexView height={60} hAlignContent='center' marginTop={10} marginBottom={10}>
         <Menu/>
         </FlexView>
+        <FlexView hAlignContent='center'>
+        <Segment compact>
+        
         <CreateAccountScreen introText={"Create your TRUSeeker account"}/>
+        </Segment>
+        </FlexView>
     </div>
 )
 }
